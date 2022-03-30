@@ -1,11 +1,11 @@
 <template>
   <main>
-    <h1>Film</h1>
+    <h1 v-if='arrMovies != 0'>Film</h1>
     <BooflixCard v-for="movie in arrMovies"
     :key='movie.id'
     :info='movie'
     />
-    <h1>Serie TV</h1>
+    <h1 v-if='arrMovies != 0'>Serie TV</h1>
     <BooflixCard v-for="series in arrSeries"
     :key='series.id'
     :info='series'
