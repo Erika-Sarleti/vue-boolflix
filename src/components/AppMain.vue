@@ -1,14 +1,20 @@
 <template>
   <main>
+    <h1>Film</h1>
     <BooflixCard v-for="movie in arrMovies"
     :key='movie.id'
     :info='movie'
     />
+    <h1>Serie TV</h1>
+    <BooflixCard v-for="series in arrSeries"
+    :key='series.id'
+    :info='series'
+    /> 
   </main>
 </template>
 
 <script>
-import BooflixCard from './components/BooflixCard.vue';
+import BooflixCard from '@/components/BooflixCard.vue';
 
 export default {
     name: 'AppMain',
