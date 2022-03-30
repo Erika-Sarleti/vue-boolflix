@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <AppHeader @search="findMovie"/>
-    <AppMain/>
+    <AppHeader @search="findSearch"/>
+    <AppMain  :/>
   </div>
 </template>
 
@@ -23,19 +23,51 @@ export default {
     }
   },
   methods:{
-    findMovie(userInput){
-      axios.get('https://api.themoviedb.org/3/movie/', {
-    params: {
-      api_key: this.apiKey,
-      language: 'it-IT',
-      query: userInput,
-    }
-  }).then(response => {
-    this.movieArr = response.data
-  })
+  findSearch(userInput){
+    if (userInput != ''){
+      const objParams= {
+            api_key: this.apiKey,
+            language: 'it-IT',
+            query: userInput,
+      }
+
+      this.apiCall('movie', objParams)
+      this.apiCall('tv', objParams)
+      
+
+        
+      } else{
+        this.movieArr= [];
+      }
+    },
+    apiCall(searchType, objParams){
+    axios.get(`https://api.themoviedb.org/3/search/ ${searchType}`,{
+      params: objParams,
+    })
+      .then(response => {
+        if (searchType == 'movie'){
+          this.movieArr = response.data.results.map((movie) =>
+           ({
+              id: movie.id,
+              title: movie.title,
+              originalTitle: movie.original_title,
+              language: movie.original_language,
+              rating: movie.vote_average,
+            })
+          )
+        } else {
+            this.arrSeries = response.data.results.map((series) => ({
+              id: series.id,
+              title: series.name,
+              originalTitle: series.original_name,
+              language: series.original_language,
+              rating: series.vote_average,
+            }));
+          }
+        }
+      }
     }
   }
-}
 </script>
 
 <style lang="scss">
