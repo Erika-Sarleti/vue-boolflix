@@ -22,7 +22,7 @@ export default {
       arrSeries:[],
       apiKey: 'ba3c7b44f63406966919314d1d6a1d9d',
       basePath: 'http://image.tmdb.org/t/p/w500/',
-      defaultImageUrl: 'https://picsum.photos/id/135/300/300',
+      defaultImageUrl: 'https://picsum.photos/id/135/500/750',
       maxRating: 5,
     }
   },
@@ -81,5 +81,15 @@ export default {
 </script>
 
 <style lang="scss">
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: sans-serif;
+  min-height: 100vh;
+  background-color: #555555;
+}
 
 </style>

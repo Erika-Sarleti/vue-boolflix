@@ -1,15 +1,21 @@
 <template>
   <main>
-    <h1 v-if='arrMovies != 0'>Film</h1>
-    <BooflixCard v-for="movie in arrMovies"
-    :key='movie.id'
-    :info='movie'
-    />
-    <h1 v-if='arrMovies != 0'>Serie TV</h1>
-    <BooflixCard v-for="series in arrSeries"
-    :key='series.id'
-    :info='series'
-    /> 
+    <h2 v-if='arrMovies != 0'>Film</h2>
+    <div class="list-container">
+      <BooflixCard v-for="movie in arrMovies"
+      :key='movie.id'
+      :info='movie'
+      />
+    </div>
+    <h2 v-if='arrMovies != 0'>Serie TV</h2>
+    <div class="list-container">
+      <BooflixCard v-for="series in arrSeries"
+      :key='series.id'
+      :info='series'
+      /> 
+    </div>
+    
+    
   </main>
 </template>
 
@@ -29,6 +35,14 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped lang='scss'>
+h2{
+  margin: 2rem auto;
+  color: white;
+  text-transform: uppercase;
+}
+.list-container{
+  display: flex;
+  flex-wrap: wrap;
+}
 </style>
