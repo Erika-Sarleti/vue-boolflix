@@ -25,6 +25,7 @@ export default {
       arrMovies: Array,
       arrSeries: Array,
     },
+      
 }
 </script>
 

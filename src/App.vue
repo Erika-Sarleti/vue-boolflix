@@ -21,6 +21,9 @@ export default {
       movieArr:[],
       arrSeries:[],
       apiKey: 'ba3c7b44f63406966919314d1d6a1d9d',
+      basePath: 'http://image.tmdb.org/t/p/w500/',
+      defaultImageUrl: 'https://picsum.photos/id/135/300/300',
+      maxRating: 5,
     }
   },
   methods:{
@@ -47,7 +50,9 @@ export default {
               title: movie.title,
               originalTitle: movie.original_title,
               language: movie.original_language,
-              rating: movie.vote_average,
+              rating: this.normalizeRating(movie.vote_average),
+              maxRating: this.maxRating,
+              srcPoster: this.getPosterUrl(this.basePath, movie.poster_path),
             }));
     } else {
         this.arrSeries = response.data.results.map(series =>({
@@ -55,11 +60,22 @@ export default {
           title: series.name,
           originalTitle: series.original_name,
           language: series.original_language,
-          rating: series.vote_average,
+          rating: this.normalizeRating(series.vote_average),
+          maxRating: this.maxRating,
+          srcPoster: this.getPosterUrl(this.basePath, series.poster_path),
         }))
       }
     })
   },
+  getPosterUrl(basePath, pathOriginal) {
+      if (pathOriginal === null) {
+        return this.defaultImageUrl;
+      }
+      return (basePath + pathOriginal);
+    },
+     normalizeRating(ratingOriginal) {
+      return Math.ceil((ratingOriginal * this.maxRating) / 10);
+    },
   }
   }
 </script>
